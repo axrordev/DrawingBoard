@@ -1,0 +1,71 @@
+﻿@* @using DrawingBoard.Web.Models.Drawings
+@model IEnumerable<DrawingViewModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Collaborative Drawing Board</h1>
+
+    <form asp-action="CreateDrawing" method="post">
+        <input type="text" name="drawingName" placeholder="Enter Drawing Name" required />
+        <input type="text" name="userName" placeholder="Enter Your Name" required />
+        <button type="submit" class="btn btn-success">Create New Drawing</button>
+    </form>
+
+    <h2>Recent Drawings</h2>
+    <div class="row">
+        @foreach (var drawing in Model)
+        {
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@drawing.Name</h5>
+                        <p class="card-text">Created by @drawing.UserName</p>
+                        <a href="@Url.Action("Index", "Drawing", new { id = drawing.Id })" class="btn btn-primary">Open</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+ *@
+
+
+@using DrawingBoard.Web.Models.Drawings
+@model IEnumerable<DrawingViewModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Collaborative Drawing Board</h1>
+
+    <form asp-action="CreateDrawing" method="post">
+        <input type="text" name="drawingName" placeholder="Enter Drawing Name" required />
+        <input type="text" name="userName" placeholder="Enter Your Name" required />
+        <button type="submit" class="btn btn-success">Create New Drawing</button>
+    </form>
+
+    <h2>Recent Drawings</h2>
+    <div class="row">
+        @foreach (var drawing in Model)
+        {
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@drawing.Name</h5>
+                        <p class="card-text">Created by @drawing.UserName</p>
+                        <a href="@Url.Action("Index", "Drawing", new { id = drawing.Id })" class="btn btn-primary">Open</a>
+                        <a href="@Url.Action("Edit", "Drawing", new { id = drawing.Id })" class="btn btn-warning">Edit</a>
+                        <form action="@Url.Action("Delete", "Drawing", new { id = drawing.Id })" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

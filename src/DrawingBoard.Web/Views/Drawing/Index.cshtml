@@ -1,0 +1,25 @@
+﻿ @model DrawingBoard.Web.Models.Drawings.DrawingViewModel
+
+@{
+    ViewData["Title"] = "Drawing Page";
+}
+
+<div id="drawingContainer" style="position: relative; height: 100%; width: 100%; margin: 0; padding: 0; overflow: hidden;">
+    <button id="clearButton" type="button" class="btn btn-danger" style="position: absolute; top: 10px; left: 10px; z-index: 1;">Clear</button>
+    <canvas id="drawingCanvas" style="border: 1px solid #000000; position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
+</div>
+
+@section Scripts {
+    <script src="~/js/drawing.js"></script>
+    <script>
+        function resizeCanvas() {
+            var canvas = document.getElementById('drawingCanvas');
+            var container = document.getElementById('drawingContainer');
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+    </script>
+}
